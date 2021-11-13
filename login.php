@@ -11,7 +11,7 @@ require_once "/home/mir/lib/db.php";
   else if (isset($_POST['username'])){
     echo 'Wrong credentials';
   }
-//Vi TEST OKAY bruger POST, selvom man normalt bruger GET hvis man ikke skal redigere,
+//Vi TEST bruger POST, selvom man normalt bruger GET hvis man ikke skal redigere,
 //da informationen skal holdes hemmeligt, og GET viser informationen i URL'en
 ?>
 
