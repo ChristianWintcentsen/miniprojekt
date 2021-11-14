@@ -12,16 +12,19 @@ if (isset($_POST['firstname'])
   }
 
 }
-//form hvor brugeroplysiger udfyldes, samt parametre navngives. 
+//form hvor brugeroplysiger udfyldes, samt parametre navngives.
 //Post bruges da vi modificerer databaseindhold
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link href="styling.css" rel="stylesheet" />
     <meta charset="utf-8">
     <title>Blog</title>
   </head>
   <body>
+    <h1>Chreddit</h1>
+
     <form class="" action="" method="post">
       <input type="text" name="firstname" value="" placeholder="Fornavn">
       <br>
@@ -32,6 +35,10 @@ if (isset($_POST['firstname'])
       <input type="password" name="newpword" value="" placeholder="Adgangskode">
       <br>
       <button type="submit" name="login">Opret bruger</button>
+      <br>
   </form>
+  <form class="" action="main.php" method="post">
+        <button type="submit" name="login">Forside</button>
+      </form>
 </body>
 </html>
