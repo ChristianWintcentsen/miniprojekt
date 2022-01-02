@@ -16,13 +16,15 @@ arsort($pids);
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="styling.css" rel="stylesheet" />
     <meta charset="utf-8">
-    <title></title>
+    <title>FrihedensForum</title>
   </head>
   <body>
+    <div class='container-fluid'>
 
-<h1>Chreddit</h1>
+<h1>Frihedens forum</h1>
 
     <?php
     //vi bruger her 'if (!empty($_SESSION['user']' til at tjekke om en bruger er logget ind.
@@ -31,48 +33,59 @@ arsort($pids);
     //Hvis 'empty' er 'true' vil det ikke være muligt at oprette indlæg
     if (!empty($_SESSION['user'])) {
     echo '
+    <div class="btn-group">
     <form class="" action="NytIndlæg.php" method="post">
-          <button type="submit" name="login">Lav indlæg</button>
+          <input type="submit" name="post" class="btn btn-info" value="Lav indlæg">
         </form>
         <br>
         <form class="" action="users.php" method="post">
-            <button type="submit" name="signup">Brugere</button>
+            <input type="submit" name="users" class="btn btn-secondary" value="Brugere">
         </form>
         <br>
         <form class="" action="logout.php" method="post">
-          <input type="submit" name="" value="Log ud">
+          <input type="submit" name="logout" class="btn btn-danger" value="Log ud">
           <br>
           <br>
         </form>
+        </div>
     ';
 }
     if (empty($_SESSION['user'])) {
     echo '
+    <div class="btn-group">
     <form class="" action="signup.php" method="post">
-      <button type="submit" name="signup">Opret bruger</button>
+      <input type="submit" name="signup" class="btn btn-warning" value="Opret bruger">
   </form>
   <br>
   <form class="" action="login.php" method="post">
-      <button type="submit" name="signup">Log ind</button>
+      <input type="submit" name="login" class="btn btn-success" value="Log ind">
   </form>
   <br>
   <form class="" action="users.php" method="post">
-      <button type="submit" name="signup">Brugere</button>
+      <input type="submit" name="users" class="btn btn-secondary" value="Brugere">
   </form>
   <br>
+  
+  <br>
+  </div>
       ';
       }
 // KØRER ALLE POST ID'S IGENNEM OG HENTER DET POST, DER ER TILKNYTTET DET POST ID.
 // ECHO'ER DEREFTER UID, TITLE OG CONTENT
 foreach ($pids as $pid) {
   $post = get_post($pid);
+  echo '<h5>Bruger:</h5>';
+  echo '<p>';
   echo $post['uid'];
-  echo '<br>';
+  echo '<p>';
+  echo '<h5>Titel:</h5>';
+  echo '<p>';
   echo $post['title'];
-  echo '<br>';
+  echo '<p>';
+  echo '<h5>Indhold:</h5>';
+  echo '<p>';
   echo $post['content'];
-  echo '<br>';
-
+  echo '</p>';
 
   $iids = get_iids_by_pid($pid);
 
@@ -81,6 +94,10 @@ foreach ($pids as $pid) {
     echo '<img src="';
     echo $image['path'];
     echo '" alt="">';
+    echo '<h5>Dato:</h5>';
+    echo '<p>';
+    echo $post['date'];
+    echo '</p>';
     echo '<br>';
       }
 
@@ -101,8 +118,12 @@ foreach ($pids as $pid) {
   // OG ECHOER UID OG CONTENT UD
   foreach($cids as $cid) {
     $comment = get_comment($cid);
+    echo '<h5>Kommentar:</h5>';
+    echo '<h6>Bruger:</h6>';
+    echo '<p>';
     echo $comment['uid'];
-    echo "<br>";
+    echo '</p>';
+    echo '<h6>Indhold:</h6>';
     echo $comment['content'];
     if (!empty($_SESSION['user'])) {
         if ($comment['uid'] == $_SESSION['user'] || $post['uid'] == $_SESSION['user']) {
@@ -123,7 +144,7 @@ foreach ($pids as $pid) {
     <input type="hidden" name="kommentar_pid" value="';
     echo $pid;
     echo '">
-    <input type="submit" name="" value="Tilføj kommentar">
+    <input type="submit" name="" class="btn btn-secondary" value="Tilføj kommentar">
   </form>';
   }
 
@@ -133,7 +154,7 @@ foreach ($pids as $pid) {
 
  ?>
 
-
+</div>
 
   </body>
 </html>

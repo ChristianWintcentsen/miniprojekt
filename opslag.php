@@ -17,51 +17,60 @@
     <!DOCTYPE html>
     <html lang="en" dir="ltr">
       <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link href="styling.css" rel="stylesheet" />
         <meta charset="utf-8">
-        <title></title>
+        <title>FrihedensForum</title>
       </head>
       <body>
-        <h1>Chreddit</h1>
+        <div class='container-fluid'>
+        <h1>Frihedens forum</h1>
         <form class="" action="main.php" method="post">
-              <button type="submit" name="login">Forside</button>
+          <input type="submit" name="users" class="btn btn-primary" value="Forside">
             </form>
+            <br>
 
-      </body>
-    </html>
+ <b>Bruger:</b>
 
     <?php
 
   echo '<a href="https://wits.ruc.dk/~wintcent/wits/miniprojekt/profil.php?user=', $user['uid'], '">';
-echo $user['firstname'];
-    echo $user['lastname'];
+    echo $user['uid'];
     echo '</a>';
-    echo "<br>";
+    echo '<br>';
+    echo '<br>';
+    echo '<h5>Titel: </h5>';
+    echo '<p>';
     echo $post['title'];
-    echo "<br>";
+    echo '</p>';
+    echo '<h5>Indhold: </h5>';
+    echo '<p>';
     echo $post['content'];
-
+    echo '</p>';
+    echo '<h5>Kommentarer:</h5>';
+?>
+<?php
     foreach ($commentid as $cid){
       $comment = get_comment($cid);
-       echo "<br>";
-       echo "<br>";
        echo '<a href="https://wits.ruc.dk/~wintcent/wits/miniprojekt/profil.php?user=', $comment['uid'], '">';
       echo $comment['uid'];
       echo '</a>';
-        echo "<br>";
+        echo '<p>';
       echo $comment['content'];
+      echo '</p>';
     }
 
     foreach ($imageid as $iid){
      $image = get_image($iid);
       echo "<br>";
-     echo $image['iid'];
+     //echo $image['iid'];
       echo "<br>";
-     echo $image['path'];
+     //echo $image['path'];
      echo "<br>";
      echo "<img src='", $image['path'],"'>";
-
-
-    }
+  }
 
   ?>
+</div>
+      </body>
+    </html>
